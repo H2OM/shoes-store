@@ -1,0 +1,56 @@
+.Footer {
+    bottom: 0px;
+    background-color: $dark-blue;
+    height: 255px;
+    width: 100%;
+    padding-top: 45px;
+    .grid {
+        display: flex;
+        justify-content: space-between;
+    }
+    &__block {
+        display: flex;
+        flex-direction: column;
+    }
+    &__link {
+        font-size: 16px;
+        text-decoration: none;
+        color: white;
+        margin-bottom: 15px;
+    }
+    &__logo {
+        height: 100px;
+        width: auto;
+    }
+    &__form {
+        margin-top: 10px;
+        background-color: unset;
+        border: 1px solid $dark-purple;
+        height: 35px;
+        border-radius: 5px;
+        &__input {
+            background-color: unset;
+            padding: 0 10px;
+            border: none;
+            font-size: 16px;
+            color: white;
+            &:focus {
+                outline: none;
+            }
+            &::placeholder {
+                font-size: 16px;
+                color: rgb(180, 180, 180);
+                font-style: italic;
+            }
+        }
+        &__submit {
+            background: $dark-purple;
+            height: 100%;
+            font-size: 16px;
+            color: white;
+            padding: 0 10px;
+            border: none;
+            cursor: pointer;
+        }
+    }
+}

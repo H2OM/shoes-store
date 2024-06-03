@@ -1,0 +1,142 @@
+.FirstPage {
+    padding-bottom: 60px;
+}
+.Slider {
+    background-color: $dark-purple;
+    padding: 45px;
+    min-height: 550px;
+    &__sections {
+        display: flex;
+
+        &__desc {
+            display: grid;
+            grid-template-rows: auto 1fr auto;
+            grid-template-columns: 1fr;
+            justify-content: start;
+            align-items: start;
+            padding-right: 30px;
+            width: 66%;
+            &__text {
+                margin-top: 20px;
+                font-size: 16px;
+                font-weight: 200;
+                color: white;
+                text-indent: 20px;
+                line-height: 28px;
+            }
+            &__nav {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                &__arrows-wrap {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    height: 32px;
+                    width: 32px;
+                    border-radius: 5px;
+                    background-color: $black-purple;
+                    transition: 0.2s all;
+                    cursor: pointer;
+                    &:hover {
+                        box-shadow: -4px 4px 0px 0px #340346;
+                    }
+                    &:active {
+                        box-shadow: unset;
+                    }
+                    &__arrows {
+                        height: 20px;
+                        width: auto;
+                        filter: invert(1);
+                    }
+                    &:last-child {
+                        transform: rotate(180deg);
+                        &:hover {
+                            box-shadow: -4px -4px 0px 0px #340346;
+                        }
+                        &:active {
+                            box-shadow: unset;
+                        }
+                    }
+                }
+                &__bars {
+                    display: flex;
+                    &__bar {
+                        background-color: rgba(255, 255, 255, 0.685);
+                        height: 5px;
+                        width: 50px;
+                        margin: 0 3px;
+                        border-radius: 2px;
+                        transition: 0.2s all;
+                        cursor: pointer;
+                        &:hover {
+                              width: 80px;      
+                        }
+                        &_active {
+                            background-color: white;
+                            width: 80px;
+                            
+                        }
+                    }
+                }
+            }
+        }
+        &__slide {
+            &__img {
+                height: 550px;
+                max-width: 400px;
+                object-fit: cover;
+                border-radius:10px;
+                box-shadow: 8px 8px 0px 0px $black-purple;
+            }
+        }
+    }
+}
+.block {
+    padding-top: 45px;
+    padding-bottom: 30px;
+    &__topbar {
+        display: flex;
+        justify-content: space-between;
+        &__nav {
+            display: flex;
+            &-wrap {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 32px;
+                width: 32px;
+                border-radius: 5px;
+                background-color: #340346d3;
+                transition: 0.2s all;
+                &:hover {
+                    box-shadow: -4px 4px 0px 0px $dark-purple;
+                }
+                &:active {
+                    box-shadow: 0px 0px 0px 0px $dark-purple;
+                }
+                &__arrows {
+                    height: 20px;
+                    filter: invert(1);
+                    cursor: pointer;
+                }
+                &:last-child {
+                    margin-left: 50px;
+                    transform: rotate(180deg);
+                    &:hover {
+                        box-shadow: -4px -4px 0px 0px $dark-purple;
+                    }
+                    &:active {
+                        box-shadow: 0px 0px 0px 0px $dark-purple;
+                    }
+                }
+            }
+        }
+    }
+    &__content {
+        margin: 0 -15px;
+        margin-top: 20px;
+        display: flex;
+        flex-wrap: wrap;
+    }
+}

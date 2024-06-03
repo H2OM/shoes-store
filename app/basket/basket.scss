@@ -1,0 +1,167 @@
+.Basket {
+    padding-top: 45px;
+    padding-bottom: 30px;
+    &__split {
+        display: flex;
+        margin-top: 25px;
+        &__side {
+            width: 25%;
+            background-color: white;
+            box-shadow: 0 0 10px 0 rgba(0,0,0,.15);
+            padding: 10px;
+            height: 275px;
+            &__block {
+                margin-bottom: 15px;
+                &__title {
+                    font-weight: 400;
+                }
+                &__value {
+                    margin-top: 3px;
+                    font-weight: 600;
+                }
+            }
+            &__confirm {
+                width: 100%;
+                font-weight: 400;
+            }
+            &__clear {
+                color: black;
+                font-weight: 400;
+                width: 100%;
+                margin-top: 10px;
+                background-color: $gray;
+            }
+        }
+        &__content {
+            width: 75%;
+            padding-left: 20px;
+            &__cart {
+                display: grid;
+                grid-template-columns: 30% auto auto;
+                column-gap: 10px;
+                justify-content: space-between;
+                // background-color: aqua;
+                background-color: unset;
+                padding: 15px 10px;
+                border-bottom: 1px solid $gray;
+                &:first-child {
+                    padding-top: 0px;
+                }
+                &__desc {
+                    &__price {
+                        font-size: 18px;
+                        font-weight: 600;
+                        &_new {
+                            color: $dark-purple;
+                        }
+                        &_old {
+                            padding-left: 5px;
+                            font-size: 16px;
+                            font-weight: 500;
+                            color: #000;
+                            text-decoration: line-through;
+                            font-style: italic;
+                        }
+                    }
+                    &__title {
+                        margin: 10px 0px;
+                        font-weight: 400;
+                        font-size: 16px;
+                        &__type {
+                            font-size: 14px;
+                            font-weight: 400;
+                            color: rgba(75,75,75,.8);
+                        }
+                    }
+                    &__subtitle {
+                        font-size: 15px;
+                        margin: 10px 0px;
+                        color: $light-black;
+                    }
+                }
+                &__options {
+                    display: grid;
+                    align-self: center;
+                    grid-template-columns: 1fr 1fr auto;
+                    justify-content: center;
+                    align-items: center;
+                    column-gap: 40px;
+                    height: 30px;
+                    &__btn {
+                        width: auto;
+                        height: 100%;
+                        background-color: $gray;
+                        border: none;
+                        padding: 4px 20px;
+                        font-weight: 300;
+                        border-radius: 4px;
+                        font-size: 16px;
+                        cursor: pointer;
+                        transition: 0.1s all;
+                        &__svg {
+                            margin-left: 5px;
+                            height: 12px;
+                            width: auto;
+                        }
+                    }
+                    &__value {
+                        height: 100%;
+                        width: 100%;
+                        border: 1px solid $dark-purple;
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        border-radius: 4px;
+                        &__btn {
+                            background-color: $dark-purple;
+                            width: auto;
+                            border: none;
+                            height: 100%;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            padding: 0 10px;
+                            cursor: pointer;
+                            transition: 0.2s all;
+                            &__svg { 
+                                height: 17px;
+                                width: auto;
+                            }
+                        }
+                        &__show {
+                            min-width: 50px;
+                            padding: 0 5px;
+                            text-align: center;
+                        }
+                    }
+                    &__remove {
+                        height: 30px;
+                        width: 30px;
+                        align-self: center;
+                        border-radius: 100%;
+                        border: unset;
+                        background-color: $gray;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        cursor: pointer;
+                        &__svg {
+                            height: 20px;
+                            width: auto;
+                        }
+                    }
+
+                }
+                &__image {
+                    height: 160px;
+                    width: 160px;
+                    object-fit: cover;
+                    border-radius: 10px;
+                }
+                &:last-child {
+                    border: unset;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,9 @@
+.loadScrin {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0px;
+    left: 0px;
+    z-index: 1000;
+    animation: screen .1s 1s linear forwards;
+}

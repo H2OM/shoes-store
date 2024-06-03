@@ -1,0 +1,71 @@
+.spinner {
+    
+    position: absolute;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: row;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    &::after {
+        content: "";
+        display: block;
+        opacity: 0;
+        height: 2px;
+        width: 2px;
+        background-color: $dark-purple;
+        animation: rightLine 1s 0.5s forwards infinite;
+    }
+    &::before {
+        content: "";
+        display: block;
+        opacity: 0;
+        height: 2px;
+        width: 2px;
+        background-color: $dark-purple;
+        animation: leftLine 1s 0.5s forwards infinite;
+    }
+}
+
+@keyframes leftLine {
+    from {
+        width: 2px;
+        opacity: 1;
+    }
+    50% {
+        width: 100px;
+        transform: translateX(0%);
+        opacity: 1;
+    }
+    60% {
+        width: 100px;
+        transform: translateX(-20%);
+        opacity: 1;
+    }
+    to {
+        width: 2px;
+        transform: translateX(0%); 
+        opacity: 1;
+    }
+}
+@keyframes rightLine {
+    from {
+        width: 2px;
+        opacity: 1;
+    }
+    50% {
+        width: 100px;
+        transform: translateX(0%);
+        opacity: 1;
+    }
+    60% {
+        width: 100px;
+        transform: translateX(20%);
+        opacity: 1;
+    }
+    to {
+        width: 2px;
+        transform: translateX(0%); 
+        opacity: 1;
+    }
+}

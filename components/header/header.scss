@@ -1,0 +1,72 @@
+.Header {
+    display: grid;
+    position: relative;
+    grid-template-columns: 2fr 1fr 2fr;
+    justify-content: space-between;
+    align-items: center;
+    background-color: $dark-blue;
+    height: 100px;
+    width: 100%;
+    padding: 0 60px;
+    z-index: 50;
+    &__logo {
+        justify-self: center;
+        height: 100px;
+    }
+    &__links {
+        display: flex;
+        justify-content: space-between;
+        &__link {
+            font-size: 16px;
+            text-decoration: none;
+            color: white;
+            margin-left: 50px;
+            &:first-child {
+                margin-left: 0px;
+            }
+            &:last-child {
+                margin-right: 10px;
+            }
+        } 
+    }
+    &__btns {
+        display: flex;
+        justify-self: end;
+        &__btn {
+            position: relative;
+            &:first-child {
+                margin-right: 30px;
+            }
+            &__count {
+                position: absolute;
+                top: 0px;
+                right: 10px;
+                background-color: #008cff;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                text-align: center;
+                min-width: 20px;
+                height: 20px;
+                transform: translateY(-100%);
+                &__loader {
+                    width: 80%;
+                    height: 80%;
+                    border: 1px solid white;
+                    border-left: unset;
+                    border-radius: 50%;
+                    animation: loader 0.5s forwards linear infinite;
+                }
+                @keyframes loader {
+                    from {
+                        transform: rotate(0deg);
+                    }
+                    to {
+                        transform: rotate(360deg);
+                    }
+                }
+            }
+            
+        }
+    }
+}

@@ -1,0 +1,21 @@
+{
+  "name": "check",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev -p 3000",
+    "build": "next build ",
+    "start": "next start -p 3000",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "next": "14.0.4",
+    "react": "^18",
+    "react-dom": "^18",
+    "@reduxjs/toolkit": "^1.9.7",
+    "react-redux": "^8.1.3"
+  },
+  "devDependencies": {
+    "sass": "^1.69.5"
+  }
+}

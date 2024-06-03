@@ -1,0 +1,204 @@
+.Autorization {
+    padding-top: 45px;
+    padding-bottom: 60px;
+    &__spinnerWrap {
+        height: 250px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        &__spinner {
+            width: 50px;
+            height: 50px;
+            background-color: unset;
+            border: 2px solid #971cc3;
+            border-bottom: unset;
+            border-left: 10px solid #971cc3;
+            border-radius: 50%;
+            animation: spinnerAuth 1s linear forwards infinite;
+        }
+    }
+    &__tabs {
+        position: relative;
+        display: flex;
+        margin: 0 auto;
+        margin-top: 20px;
+        max-width: 560px;
+        height: 45px;
+        border-radius: 30px;
+        box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, 0.2);
+        &__roller {
+            position: absolute;
+            z-index: 4;
+            top: 0;
+            left: 0;
+            width: 50%;
+            height: 100%;
+            background-color: $dark-purple;
+            transition: 0.2s all;
+            border-radius: 30px;
+            box-shadow: 2px 0px 6px 0px rgba(0, 0, 0, 0.2);
+            &_roll {
+                left: 50%;
+            }
+        }
+        &__btn {
+            position: relative;
+            z-index: 5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 50%;
+            height: 100%;
+            background: unset;
+            font-weight: 300;
+            font-size: 22px;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            &:active {
+                color: initial;
+            }
+            &_active {
+                animation: btnColor 0.1s linear forwards;
+            }
+            &_block {
+                transition: .2s all;
+                filter: blur(2px);
+            }
+        }
+    }
+    &__content {
+        position: relative;
+        &__form {
+            margin: 0 auto;
+            max-width: 500px;
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            &_type2 {
+                display: block;
+                max-width: 800px;
+                &__footer {
+                    margin: 0 auto;
+                    margin-top: 20px;
+                    width: 80%;
+                }
+            }
+            &__subBlock {
+                display: grid;
+                height: 31px;
+                align-items: center;
+                grid-template-columns: repeat(3, 1fr);
+            }
+            &__split {
+                display: flex;
+                &__block {
+                    display: flex;
+                    flex-direction: column;
+                    width: 100%;
+                    &:first-child {
+                        margin-right: 8px;
+                    }
+                    &:last-child {
+                        margin-left: 8px;
+                    }
+                }
+            }
+
+            &__label {
+                display: block;
+                font-size: 16px;
+                padding-left: 10px;
+                font-weight: 300;
+                margin-bottom: 2px;
+                &_radio {
+                    position: relative;
+                    margin-left: 20px;
+                    cursor: pointer;
+                    &::before {
+                        transition: 0.1s all;
+                        position: absolute;
+                        content: "";
+                        top:2px;
+                        left: -10px;
+                        width: 13px;
+                        height: 13px;
+                        border-radius: 100%;
+                        border: 1px solid black;
+                    }
+                    
+                }
+            }
+            &__input {
+                border: 1px solid $dark-purple;
+                position: relative;
+                padding: 5px 10px;
+                display: block;
+                background-color: unset;
+                font-size: 16px;
+                border-radius: 5px;
+                margin-bottom: 10px;
+                &_radio {
+                    display: none;
+                    position: relative;
+                    &:checked {
+                        & + .Autorization__content__form__label_radio {
+                            &::before {
+                                transition: 0.1s all;
+                                position: absolute;
+                                content: "";
+                                top: 2px;
+                                left: -10px;
+                                width: 13px;
+                                height: 13px;
+                                border-radius: 100%;
+                                border: 1px solid #000;
+                                outline: 2px solid #FFFFFE;
+                                background-color: #971cc3;
+                                outline-offset: -3px;
+                            }
+                        }
+                    }
+                }
+                &:focus {
+                    outline: 1px solid $dark-purple;
+                    outline-offset: -2px;
+                }
+                
+            }
+            &__subinfo {
+                border: none;
+                background-color: unset;
+                text-decoration: underline;
+                color: $dark-purple;
+                font-size: 14px;
+                font-weight: 500;
+                align-self: flex-end;
+                margin-top: -8px;
+                margin-bottom: 20px;
+                cursor: pointer;
+            }
+            &__btn {
+                margin-top: 2px;
+                width: 100%;
+            }
+        }
+    }
+}
+@keyframes btnColor {
+    from {
+        color: black;
+    }
+    to {
+        color: white;
+    }
+}
+@keyframes spinnerAuth {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
