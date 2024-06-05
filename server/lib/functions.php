@@ -494,10 +494,9 @@
         }
 
         try {
-
             $isFavoritesParamIsset = (isset($_GET['fav']) && $_GET['fav'] == 'true');
 
-            $userFavoritesQueryPart = ($isFavoritesParamIsset ? "JOIN favorites ON favorites.Goods_id = goods.id" : "");
+            $userFavoritesQueryPart = ($isFavoritesParamIsset ? "JOIN favorites ON favorites.Goods_id = goods.id " : "");
 
             $result = Db::getQuery("SELECT filters.Filter, filters.Code, filters.Type, filters_values.id,
                                     IF(filters.Type = 'Multi' AND filters_goods.filter_value_id = filters_values.id, filters_values.value, 

@@ -13,8 +13,7 @@ export default function Login () {
         <form className="Autorization__content__form" method="post" onSubmit={async e=>{
             e.preventDefault();
             const formData = new FormData(e.target);
-            const {meta : {requestStatus}, payload} = dispatch(fetchRequest({url: 'http://localhost/api/user/sign-in', m: 'POST', b: formData}));
-            console.log(requestStatus, payload);
+            const {meta : {requestStatus}, payload} = await dispatch(fetchRequest({url: 'http://localhost/api/user/sign-in', m: 'POST', b: formData}));
             if (requestStatus === 'fulfilled') {
                 if(payload == true) {
                     window.location.replace("http://localhost/");

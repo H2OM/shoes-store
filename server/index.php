@@ -12,9 +12,13 @@
     Db::instance();
 
     if($Routing->determineRoute()) {
-        
+
         $Routing->tempClass->run($Routing->query);
+
     } else {
+
         header("HTTP/1.0 400 Bad request");
+        
+        die;
     }
   

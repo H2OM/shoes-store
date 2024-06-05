@@ -42,7 +42,6 @@
 
             try {
 
-
                 $userQueryPart = ($this->isUserSessionIsset ? " IF(favorites.Goods_id = goods.id, true, false) AS Fav, " : "");
 
                 $product = Db::getPreparedQuery("SELECT goods.*, Base.value AS Color, categories.Code AS Category, $userQueryPart

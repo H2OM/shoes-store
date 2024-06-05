@@ -38,6 +38,7 @@
                                                 LEFT JOIN favorites ON goods.id = favorites.Goods_id
                                                 WHERE goods.Article = ? AND filters.Code = 'size'", 
                                                 [["VALUE"=>$_POST['size'], "PARAMVALUE"=>4],["VALUE"=>$_POST['article'], "PARAMVALUE"=>13]]);
+            
 
                 if(empty($result)) {
 

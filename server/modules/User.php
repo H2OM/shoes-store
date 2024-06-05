@@ -274,7 +274,6 @@
                 if(isset($_SESSION['basket']) && !empty($_SESSION['basket'])) {
 
                     foreach($_SESSION['basket'] as $k=>$v) {
-
                         if(($v['Article'] == $_GET['article']) && isset($_SESSION['basket'][$k]['Fav'])) {
 
                             $_SESSION['basket'][$k]['Fav'] = !$v['Fav'];
@@ -291,6 +290,7 @@
             } catch(\PDOException $e) {
 
                 header("HTTP/1.0 400 Bad request");
+                
                 die;
             }
         }

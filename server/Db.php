@@ -45,9 +45,9 @@
             if(!$isResultAnArray || ($ARRAY_ONLY && empty($out))) {
 
                 $out = [$out];
-                return $out;
             }
-                
+
+            return $out;   
         }
         public static function getPreparedQuery($request, $parrametrs = [], $count = false, $FKAAN = false) {
 
@@ -83,8 +83,6 @@
                 return $result;
 
             } catch (\PDOException $e) {
-
-                Hdebug(self::$pdo->errorInfo());
 
                 throw new \PDOException();
             }
