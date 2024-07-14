@@ -16,7 +16,7 @@ export default function PersonalTabs ({children}) {
             router.push("/autorization/login");
         }
         // if (isAuth == true) {
-        //     dispatch(userFetch({url: 'http://localhost/api/user/get-user', m: 'GET', b: null}));
+        //     dispatch(userFetch({url: '/api/user/get-user', m: 'GET', b: null}));
         // }
     }, [isAuth]);
     return (
@@ -58,9 +58,9 @@ export default function PersonalTabs ({children}) {
                             <form style={{width: "48%"}} onSubmit={async (e)=>{
                                 if(!isAuth == true) return;
                                 e.preventDefault();
-                                const answer = await dispatch(fetchRequest({url: 'http://localhost/api/user/log-out', method: "GET"}));
+                                const answer = await dispatch(fetchRequest({url: '/api/user/log-out', method: "GET"}));
                                 if(!answer.error) {
-                                    window.location.replace("http://localhost/");
+                                    window.location.replace("/");
                                 }
                             }}>
                                 <button type="submit" className="Personal__split__side__block__modal__wrap__btn">Выйти</button>

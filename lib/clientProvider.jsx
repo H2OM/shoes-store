@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { basketFetch, favsFetch } from "./redux/thunks";
 import './loading.scss';
 import Spinner from "@/lib/basecomponents/spinner/spiner";
+
 const ClientContext = createContext();
 
 export const ClientProvider = ({children}) => {
@@ -19,7 +20,8 @@ export const ClientProvider = ({children}) => {
     const [error, setError] = useState(false);
     const [isAuth, setAuth] = useState('loading');
     const autorization = useCallback(async () => {
-        const respons = await fetch('http://localhost/api/user/is-auth', {method: "GET"})
+
+        const respons = await fetch('/api/user/is-auth', {method: "GET"})
             .then(data=>{
                 if(!data.ok) {
                     return false;
@@ -33,7 +35,7 @@ export const ClientProvider = ({children}) => {
         document.body.style.overflow = 'auto';
         setContentLoaded(true);
         autorization();
-        dispatch(basketFetch({url:'http://localhost/api/basket/get-basket'}));
+        dispatch(basketFetch({url:'/api/basket/get-basket'}));
         
     }, []);
    
@@ -46,7 +48,7 @@ export const ClientProvider = ({children}) => {
     }, [userStatus, fetchStatus, basketStatus, favsStatus]);
     useEffect(()=>{
         if(isAuth == true) {
-            dispatch(favsFetch({url: 'http://localhost/api/user/get-favs'}));
+            dispatch(favsFetch({url: '/api/user/get-favs'}));
         }
     }, [isAuth]);
     useEffect(()=>{

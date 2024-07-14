@@ -14,7 +14,7 @@ export default function Favorites ({searchParams}) {
         Object.keys(searchParams).map((param)=>{
             params += "&"+param+"="+searchParams[param];
         });
-        const respons = await fetch('http://localhost/api/catalog/get-catalog?fav=true'+params, {method: "GET"})
+        const respons = await fetch('/api/catalog/get-catalog?fav=true'+params, {method: "GET"})
             .then(data=>{
                 if(!data.ok) {
                     return undefined;

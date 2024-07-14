@@ -44,7 +44,7 @@ export default function Basket () {
                             } else {
                                 dispatch(favsDataSlice.actions.set(favsData.filter((val)=>val != v.Article)));
                             }
-                            dispatch(basketFetch({url: 'http://localhost/api/user/change-fav?article='+v.Article+'&action='+(v.Fav ? 'unset' : 'set'), m: "GET"}));
+                            dispatch(basketFetch({url: '/api/user/change-fav?article='+v.Article+'&action='+(v.Fav ? 'unset' : 'set'), m: "GET"}));
                         }}>
                             <Image
                                 className="Basket__split__content__cart__options__btn__svg"
@@ -61,7 +61,7 @@ export default function Basket () {
                     }
                     <div className="Basket__split__content__cart__options__value">
                         <button className="Basket__split__content__cart__options__value__btn" onClick={()=>{
-                            dispatch(basketFetch({url: 'http://localhost/api/basket/set-count', m:"POST", b: {article: v.Article, size: v.Size, type: "less"}}));
+                            dispatch(basketFetch({url: '/api/basket/set-count', m:"POST", b: {article: v.Article, size: v.Size, type: "less"}}));
                         }}> 
                             <Image
                                 className="Basket__split__content__cart__options__value__btn__svg"
@@ -76,7 +76,7 @@ export default function Basket () {
                         </button>
                         <span className="Basket__split__content__cart__options__value__show">{v.Value}</span>
                         <button className="Basket__split__content__cart__options__value__btn" onClick={()=>{
-                           dispatch(basketFetch({url: 'http://localhost/api/basket/set-count', m:"POST", b: {article: v.Article, size: v.Size, type: "more"}}));
+                           dispatch(basketFetch({url: '/api/basket/set-count', m:"POST", b: {article: v.Article, size: v.Size, type: "more"}}));
                         }}>
                             <Image
                                 className="Basket__split__content__cart__options__value__btn__svg"
@@ -91,7 +91,7 @@ export default function Basket () {
                         </button>
                     </div>
                     <button className="Basket__split__content__cart__options__remove" onClick={()=>{
-                        dispatch(basketFetch({url: 'http://localhost/api/basket/remove-prod', m:"POST", b: {article: v.Article, size: v.Size }}));
+                        dispatch(basketFetch({url: '/api/basket/remove-prod', m:"POST", b: {article: v.Article, size: v.Size }}));
                     }}>
                         <Image
                             className="Basket__split__content__cart__options__remove__svg"
@@ -149,7 +149,7 @@ export default function Basket () {
                                 </div>
                                 <Link href={"/basket/order"} className="btn Basket__split__side__confirm">Оформить заказ</Link>
                                 <button className="btn Basket__split__side__clear" onClick={()=>{
-                                    dispatch(basketFetch({url: 'http://localhost/api/basket/full-clear'}));
+                                    dispatch(basketFetch({url: '/api/basket/full-clear'}));
                                 }}>Очистить корзину</button>
                             </div>
                             <div className="Basket__split__content">

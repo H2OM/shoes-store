@@ -54,7 +54,7 @@ export default function Cart ({info, isSlide = false}) {
                 {
                     favsData !== undefined ?
                     <div className="cart__heart" onClick={async ()=>{
-                        await dispatch(basketFetch({url: 'http://localhost/api/user/change-fav?article='+Article+'&action='+(favorite ? 'unset' : 'set'), m: "GET"}))
+                        await dispatch(basketFetch({url: '/api/user/change-fav?article='+Article+'&action='+(favorite ? 'unset' : 'set'), m: "GET"}))
                             .then(data=>{
                                 if(data.meta.requestStatus !== 'rejected') {
                                     if(!favorite) {
@@ -101,7 +101,7 @@ export default function Cart ({info, isSlide = false}) {
                                     <button key={i} className="cart__sizes__wrapper__btn" onClick={async (e)=>{
                                         e.stopPropagation();
                                         statusModals({...modals, isSizes: false});
-                                        await dispatch(basketFetch({url: 'http://localhost/api/basket/add-basket', m:"POST", b: {article: Article, size: value}}));
+                                        await dispatch(basketFetch({url: '/api/basket/add-basket', m:"POST", b: {article: Article, size: value}}));
                                     }}>{value}</button>
                                 )
                             }) : <div>Товар закончился</div>

@@ -16,7 +16,7 @@ export default function Edit () {
     const dispatch = useDispatch();
     useEffect(()=>{
         if(isAuth == true && userData === undefined) {
-            dispatch(userFetch({url: 'http://localhost/api/user/get-user', m: 'GET', b: null}));
+            dispatch(userFetch({url: '/api/user/get-user', m: 'GET', b: null}));
         }
     }, [isAuth]);
     if(userData === undefined && (status == 'loading' || status == 'idle')) 
@@ -30,7 +30,7 @@ export default function Edit () {
                 <form data-form method="post" onSubmit={async (e)=>{
                     e.preventDefault();
                     const formData = new FormData(e.target);
-                    dispatch(userFetch({url: 'http://localhost/api/user/edit-user', m: 'POST', b: formData}))
+                    dispatch(userFetch({url: '/api/user/edit-user', m: 'POST', b: formData}))
                         .then(data=>{
                             console.log(data.meta.requestStatus);
                             if(data.meta.requestStatus == 'fulfilled') {

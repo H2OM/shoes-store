@@ -10,7 +10,7 @@ export default function Orders () {
     const dispatch = useDispatch();
     const fetchData = useCallback(async () => {
         setLoading(true);
-        const respons = await fetch('http://localhost/api/user/get-orders', {method: "GET"})
+        const respons = await fetch('/api/user/get-orders', {method: "GET"})
             .then(data=>{
                 if(!data.ok) {
                     return undefined;

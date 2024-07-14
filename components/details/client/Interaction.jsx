@@ -50,7 +50,7 @@ export default function Interaction ({Size, Article}) {
             
             <div className="btn Details__split__content__btn" onClick={()=>{
                 if(sizeValue) {
-                    dispatch(basketFetch({url: 'http://localhost/api/basket/add-basket', m:"POST", b: {article: Article, size: sizeValue}}));
+                    dispatch(basketFetch({url: '/api/basket/add-basket', m:"POST", b: {article: Article, size: sizeValue}}));
                 } else if (!warning) {
                     setWarning(true);
                 }
@@ -58,7 +58,7 @@ export default function Interaction ({Size, Article}) {
             {
                 favsData !== undefined ?
                 <div className="Details__split__content__favorite" onClick={()=>{
-                    dispatch(basketFetch({url: 'http://localhost/api/user/change-fav?article='+Article+'&action='+(favorite ? 'unset' : 'set'), m: "GET"}))
+                    dispatch(basketFetch({url: '/api/user/change-fav?article='+Article+'&action='+(favorite ? 'unset' : 'set'), m: "GET"}))
                         .then(data=>{
                             if(data.meta.requestStatus !== 'rejected') {
                                 if(!favorite) {

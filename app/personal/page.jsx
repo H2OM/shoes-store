@@ -13,7 +13,7 @@ export default function Profile () {
     const dispatch = useDispatch();
     useEffect(()=>{
         if(isAuth == true && userData === undefined) {
-            dispatch(userFetch({url: 'http://localhost/api/user/get-user', m: 'GET', b: null}));
+            dispatch(userFetch({url: '/api/user/get-user', m: 'GET', b: null}));
         }
     }, [isAuth]);
     if(status == 'loading' || userData === undefined && status == 'idle') 

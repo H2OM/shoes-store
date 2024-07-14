@@ -9,7 +9,7 @@ export default function FooterForm() {
         <form action="post" onSubmit={async (e)=>{
             e.preventDefault();
             const formData = new FormData(e.target);
-            dispatch(fetchRequest({url: 'http://localhost/api/callback/mail-subscribe', m: 'POST', b: formData}));
+            dispatch(fetchRequest({url: '/api/callback/mail-subscribe', m: 'POST', b: formData}));
         }}>
             <label htmlFor="mail" className="Footer__link">Подписка на рассылку:</label>
             <div className="Footer__form">

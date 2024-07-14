@@ -2,19 +2,17 @@ import { redirect } from "next/navigation";
 import './page.scss';
 import MiniSlider from "@/lib/basecomponents/miniSlider/miniSlider";
 import MainSlider from "@/components/mainSlider/client/MainSlider";
+import GET_DATA from "@/lib/GETDATA/GET_DATA";
 export default async function Page() {
-    const data = await fetch('http://127.0.0.1/api/media/main-info', {method: 'GET', cache: "no-cache"})
-    .then(data=>{
-        if(!data.ok) {
-            return false;
-        }
-        return data.json();
-    }).catch(()=>false);
+
+    const data = await GET_DATA({controller: 'media', action: 'main-info'});
+
     if(!data) {
-        redirect('catalog');
+        return redirect('catalog');
     }
-    
+
     const {slider, popular, sales} = data;
+
     return (
         <section className="FirstPage section">
             <div className="Slider">

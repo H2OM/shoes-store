@@ -8,7 +8,7 @@ export default function InfoForm () {
     const formSubmit = async (e)=>{
         e.preventDefault();
         const formData = new FormData(e.target);
-        await dispatch(fetchRequest({url: 'http://localhost/api/callback/form-callback', m: 'POST', b: formData}))
+        await dispatch(fetchRequest({url: '/api/callback/form-callback', m: 'POST', b: formData}))
             .then(()=>e.target.reset());
     }
 

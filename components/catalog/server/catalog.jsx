@@ -1,29 +1,33 @@
 import Cart from "@/lib/basecomponents/cart/cart";
-import { notFound } from "next/navigation";
+import {notFound} from "next/navigation";
 import '../catalog.scss';
 import Filters from "@/lib/basecomponents/filters/filters";
+import GET_DATA from "@/lib/GETDATA/GET_DATA";
 
-export default async function Catalog ({params, searchParams}) {
+export default async function Catalog({params, searchParams}) {
     let load = "";
-    Object.keys(searchParams).map((param)=>{
-        if(param == 'category' && ( params.type !== undefined && params.type !== "")) return;
-        load += "&"+param+"="+searchParams[param];
+    Object.keys(searchParams).map((param) => {
+        if (param == 'category' && (params.type !== undefined && params.type !== "")) return;
+        load += "&" + param + "=" + searchParams[param];
     });
-    
-    if(params.type == "" || params.type === undefined) {load = load.replace("&", "?");}
-    const catalog = await fetch('http://127.0.0.1/api/catalog/get-catalog' +
-                                    ((params.type !== "" && params.type !== undefined) 
-                                    ? ('?category='+params.type+load) 
-                                    : load), {cache: "no-cache"})
-        .then(data=>{
-            if(!data.ok) {
-                return undefined;
-            }
-            return data.json();
-        }) 
-        .catch(()=>{
-            return undefined
-        });
+
+    if (params.type == "" || params.type === undefined) {
+        load = load.replace("&", "?");
+    }
+
+    let get_params = load;
+
+    if(params.type !== "" && params.type !== undefined) {
+        get_params = '?category=' + params.type + load;
+    }
+
+    let catalog = await GET_DATA({
+        controller: "catalog",
+        action: 'get-catalog' + get_params
+    });
+
+    if(!catalog) catalog = undefined;
+
     let title = ((params.type !== undefined && params.type !== "") ? params.type.toLowerCase() : searchParams.category);
     switch (title) {
         case undefined:
@@ -45,7 +49,7 @@ export default async function Catalog ({params, searchParams}) {
         default:
             notFound();
     }
-    return  (
+    return (
         <section className="Catalog section">
             <div className="grid">
                 {catalog !== undefined ?
@@ -54,11 +58,12 @@ export default async function Catalog ({params, searchParams}) {
                             <h1 className="title title_black">{(title !== "" && title !== undefined) ? title : "Каталог"}</h1>
                             <span className="title__count"> - {catalog.count}</span>
                         </div>
-                        {(Object.keys(searchParams).length != 0 || (Array.isArray(catalog.goods) && catalog.goods.length > 0)) ? <Filters main={catalog.filters} category={title == "" ? true : false}/> : null}
+                        {(Object.keys(searchParams).length != 0 || (Array.isArray(catalog.goods) && catalog.goods.length > 0)) ?
+                            <Filters main={catalog.filters} category={title == "" ? true : false}/> : null}
                         {catalog.count > 0 ?
                             <>
                                 <div className="Catalog__content">
-                                    {catalog.goods.map(goods=>{
+                                    {catalog.goods.map(goods => {
                                         return (
                                             <Cart key={goods.id} info={goods}/>
                                         )
@@ -87,8 +92,10 @@ export default async function Catalog ({params, searchParams}) {
                                         </button>
                                     </div>
                                 </div> */}
-                            </> : <div className="title title_black" style={{marginTop: "20px", fontSize: "22px"}}>Товаров не найдено</div>}
-                    </>  : <div className="title title_black">Не удалось загрузить каталог</div>}
+                            </> :
+                            <div className="title title_black" style={{marginTop: "20px", fontSize: "22px"}}>Товаров не
+                                найдено</div>}
+                    </> : <div className="title title_black">Не удалось загрузить каталог</div>}
             </div>
         </section>
     )
