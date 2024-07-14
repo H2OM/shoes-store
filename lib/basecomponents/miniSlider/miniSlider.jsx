@@ -1,5 +1,5 @@
 'use client';
-import './miniSlider.scss';
+import './minislider.scss';
 import Cart from "@/lib/basecomponents/cart/cart";
 import Image from "next/image";
 import { useState } from "react";

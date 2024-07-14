@@ -1,5 +1,5 @@
 'use client';
-import './loadScreen.scss';
+import './loadscreen.scss';
 import ClientContext from "@/lib/clientProvider";
 import { useContext } from "react";
 

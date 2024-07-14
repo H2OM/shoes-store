@@ -1,7 +1,7 @@
 import '../personal.scss';
 import ClientLink from '@/lib/basecomponents/clientLink/clientLink';
 import ClientImage from '@/lib/basecomponents/clientImage/clientImage';
-import PersonalTabs from '../client/personalTabs';
+import PersonalTabs from '../client/PersonalTabs';
 import Loadscreen from '@/lib/basecomponents/loadScreen/loadscreen';
 
 export default function Personal ({children}) {
