@@ -4,7 +4,7 @@
 - Университет кубГТУ. 
   
 ## Технологии проекта:
-  > ### Фронт: React + Next.js.
-  > ### Бэк: PHP + Composer.
+  > ### Front-end: React + Next.js.
+  > ### Back-end: PHP + Composer.
   > ### БД: MySQL.
-  > ### Сервер: Node.js + Nginx в качестве прокси сервера и сервера.
+  > ### Сервер: Nginx + Node.js через прокси.
