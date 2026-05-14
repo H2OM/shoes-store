@@ -1,11 +1,11 @@
-/** @type {import('next').NextConfig} */
 const path = require('path');
- 
+
 module.exports = {
-    // output: 'export',
-    // assetPrefix: '/node/',
+    allowedDevOrigins: ['diplom'],
+    images: {
+        qualities: [75, 100],
+    },
     sassOptions: {
-        includePaths: [path.join(__dirname, 'styles')],
-        prependData: `@import "./app/scss/common/_Vars.scss";`
-    }
-}
+        includePaths: [path.join(__dirname, 'app')],
+    },
+};

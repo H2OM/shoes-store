@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Хост: localhost
--- Время создания: Июн 05 2024 г., 21:13
--- Версия сервера: 8.2.0
--- Версия PHP: 8.3.1
+-- Хост: 127.0.0.1:3306
+-- Время создания: Май 12 2026 г., 18:27
+-- Версия сервера: 8.0.30
+-- Версия PHP: 8.1.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- База данных: `shoesshop`
+-- База данных: `shoes_shop.sql`
 --
 
 -- --------------------------------------------------------
@@ -29,15 +29,15 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `categories` (
   `id` int UNSIGNED NOT NULL,
-  `Title` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `Code` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL
+  `title` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `code` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Дамп данных таблицы `categories`
 --
 
-INSERT INTO `categories` (`id`, `Title`, `Code`) VALUES
+INSERT INTO `categories` (`id`, `title`, `code`) VALUES
 (1, 'Мужчинам', 'man'),
 (2, 'Женщинам', 'woman'),
 (3, 'Детям', 'kids'),
@@ -50,24 +50,18 @@ INSERT INTO `categories` (`id`, `Title`, `Code`) VALUES
 --
 
 CREATE TABLE `favorites` (
-  `User_id` int UNSIGNED NOT NULL,
-  `Goods_id` int UNSIGNED NOT NULL
+  `user_id` int UNSIGNED NOT NULL,
+  `product_id` int UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Дамп данных таблицы `favorites`
 --
 
-INSERT INTO `favorites` (`User_id`, `Goods_id`) VALUES
-(15, 1),
-(15, 2),
-(12, 4),
-(11, 5),
-(12, 5),
-(15, 8),
-(12, 13),
-(12, 16),
-(12, 19);
+INSERT INTO `favorites` (`user_id`, `product_id`) VALUES
+(16, 5),
+(16, 8),
+(16, 13);
 
 -- --------------------------------------------------------
 
@@ -77,11 +71,11 @@ INSERT INTO `favorites` (`User_id`, `Goods_id`) VALUES
 
 CREATE TABLE `feedbacks` (
   `id` int UNSIGNED NOT NULL,
-  `User_id` int UNSIGNED NOT NULL,
-  `Goods_id` int UNSIGNED NOT NULL,
-  `Mark` enum('1','2','3','4','5') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `Title` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `Text` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL
+  `user_id` int UNSIGNED NOT NULL,
+  `goods_id` int UNSIGNED NOT NULL,
+  `mark` enum('1','2','3','4','5') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `title` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `text` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -92,24 +86,24 @@ CREATE TABLE `feedbacks` (
 
 CREATE TABLE `filters` (
   `id` int UNSIGNED NOT NULL,
-  `Filter` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `Code` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `Type` enum('Switch','Multi','Range','') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL
+  `filter` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `code` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `type` enum('switch','multi','range','') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Дамп данных таблицы `filters`
 --
 
-INSERT INTO `filters` (`id`, `Filter`, `Code`, `Type`) VALUES
-(1, 'Сортировка', 'sort', 'Switch'),
-(2, 'Скидка', 'sale', 'Switch'),
-(5, 'Бренд', 'brand', 'Multi'),
-(6, 'Размер', 'size', 'Multi'),
-(7, 'Цвет', 'color', 'Multi'),
-(8, 'Тип обуви', 'type', 'Multi'),
-(10, 'Цена', 'price', 'Range'),
-(11, 'Категория', 'category', 'Switch');
+INSERT INTO `filters` (`id`, `filter`, `code`, `type`) VALUES
+(1, 'Сортировка', 'sort', 'switch'),
+(2, 'Скидка', 'sale', 'switch'),
+(5, 'Бренд', 'brand', 'multi'),
+(6, 'Размер', 'size', 'multi'),
+(7, 'Цвет', 'color', 'multi'),
+(8, 'Тип обуви', 'type', 'multi'),
+(10, 'Цена', 'price', 'range'),
+(11, 'Категория', 'category', 'switch');
 
 -- --------------------------------------------------------
 
@@ -438,7 +432,7 @@ INSERT INTO `filters_goods` (`filter_value_id`, `goods_id`) VALUES
 CREATE TABLE `filters_values` (
   `id` int UNSIGNED NOT NULL,
   `value` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `Code` varchar(28) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `code` varchar(28) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   `filter_id` int UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -446,9 +440,9 @@ CREATE TABLE `filters_values` (
 -- Дамп данных таблицы `filters_values`
 --
 
-INSERT INTO `filters_values` (`id`, `value`, `Code`, `filter_id`) VALUES
-(1, 'По возрастанию цены', 'LowToHigh', 1),
-(2, 'По убыванию цены', 'HighToLow', 1),
+INSERT INTO `filters_values` (`id`, `value`, `code`, `filter_id`) VALUES
+(1, 'По возрастанию цены', 'low_to_high', 1),
+(2, 'По убыванию цены', 'high_to_low', 1),
 (3, 'По популярности', 'ByPopular', 1),
 (4, 'Да', 'Yes', 2),
 (5, 'Больше 10%', 'More10', 2),
@@ -526,24 +520,24 @@ INSERT INTO `filters_values` (`id`, `value`, `Code`, `filter_id`) VALUES
 
 CREATE TABLE `goods` (
   `id` int UNSIGNED NOT NULL,
-  `Title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `Brand` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `Type` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `Article` char(13) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `Price` float NOT NULL DEFAULT '0',
-  `Price_old` float NOT NULL DEFAULT '0',
-  `Image` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'Untitled.jpg',
-  `SliderImages` varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT 'example.jpg,example2.jpg,example3.jpg...',
-  `Description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
-  `Category_id` int UNSIGNED NOT NULL,
-  `Hit` enum('0','1') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '0'
+  `title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `brand` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `type` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `article` char(13) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `price` float NOT NULL DEFAULT '0',
+  `price_old` float NOT NULL DEFAULT '0',
+  `image` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'Untitled.jpg',
+  `slider_images` varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT 'example.jpg,example2.jpg,example3.jpg...',
+  `description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
+  `category_id` int UNSIGNED NOT NULL,
+  `hit` enum('0','1') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Дамп данных таблицы `goods`
 --
 
-INSERT INTO `goods` (`id`, `Title`, `Brand`, `Type`, `Article`, `Price`, `Price_old`, `Image`, `SliderImages`, `Description`, `Category_id`, `Hit`) VALUES
+INSERT INTO `goods` (`id`, `title`, `brand`, `type`, `article`, `price`, `price_old`, `image`, `slider_images`, `description`, `category_id`, `hit`) VALUES
 (1, 'Classic Leather', 'Reebok', 'Кроссовки', 'reebok100-100', 7999, 0, 'classicLether.jpg', 'classicLether2.webp,classicLether3.webp,classicLether4.webp,classicLether5.webp,classicLether6.webp', 'Всегда актуальны. Верх из мягкой кожи делает эти кроссовки максимально комфортными. Формованная промежуточная подошва из ЭВА обеспечивает амортизацию без утяжеления. Формованная полиуретановая стелька обеспечивает дополнительную амортизацию и комфорт.', 1, '1'),
 (2, 'Classic Leather', 'Reebok', 'Кроссовки', 'reebok101-101', 7999, 0, 'classicLetherblack.jpg', 'classicLetherblack.jpg,classicLetherblack1.webp,classicLetherblack2.webp,classicLetherblack3.webp,classicLetherblack4.webp,classicLetherblack5.webp', 'Всегда актуальны. Верх из мягкой кожи делает эти кроссовки максимально комфортными. Формованная промежуточная подошва из ЭВА обеспечивает амортизацию без утяжеления. Формованная полиуретановая стелька обеспечивает дополнительную амортизацию и комфорт.', 1, '0'),
 (3, 'Old Skool', 'Vans', 'Кеды', 'vans00100-101', 7950, 8999, 'vansOldskool.jpg', 'vansOldskool.jpg,vansOldskool2.jpg,vansOldskool3.jpg,vansOldskool4.jpg', 'Любимая обувь скейтбордистов и серферов заслуживает отдельного стеллажа в гардеробе поклонников уличной культуры. Оригинальная низкая форма из плотного текстиля дополнена замшевыми вставками в пяточной части и зоне мыска. Логотип на боковых сторонах выполнен из натуральной кожи. Вафельная резиновая подошва обеспечивает отличную амортизацию и гарантирует надежное сцепление с поверхностью. Классическое сочетание цветов позволяет комбинировать модель Vans Old Skool с любыми вещами и создавать аутфиты, которые не останутся незамеченными.', 4, '1'),
@@ -570,17 +564,17 @@ INSERT INTO `goods` (`id`, `Title`, `Brand`, `Type`, `Article`, `Price`, `Price_
 --
 
 CREATE TABLE `goods_related` (
-  `Goods_id` int UNSIGNED NOT NULL,
-  `Related_id` int UNSIGNED NOT NULL,
-  `Goods_Article` char(13) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `Related_Article` char(13) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL
+  `goods_id` int UNSIGNED NOT NULL,
+  `related_id` int UNSIGNED NOT NULL,
+  `goods_article` char(13) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `related_article` char(13) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Дамп данных таблицы `goods_related`
 --
 
-INSERT INTO `goods_related` (`Goods_id`, `Related_id`, `Goods_Article`, `Related_Article`) VALUES
+INSERT INTO `goods_related` (`goods_id`, `related_id`, `goods_article`, `related_article`) VALUES
 (1, 2, 'reebok100-100', 'reebok101-101'),
 (1, 4, 'reebok100-100', 'reebok102-102'),
 (2, 4, 'reebok101-101', 'reebok102-102'),
@@ -609,17 +603,17 @@ INSERT INTO `goods_related` (`Goods_id`, `Related_id`, `Goods_Article`, `Related
 --
 
 CREATE TABLE `goods_variations` (
-  `Base_id` int UNSIGNED NOT NULL,
-  `Variation_id` int UNSIGNED NOT NULL,
-  `Base_Article` char(13) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `Variation_Article` char(13) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL
+  `base_id` int UNSIGNED NOT NULL,
+  `variation_id` int UNSIGNED NOT NULL,
+  `base_article` char(13) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `variation_article` char(13) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Дамп данных таблицы `goods_variations`
 --
 
-INSERT INTO `goods_variations` (`Base_id`, `Variation_id`, `Base_Article`, `Variation_Article`) VALUES
+INSERT INTO `goods_variations` (`base_id`, `variation_id`, `base_article`, `variation_article`) VALUES
 (1, 2, 'reebok100-100', 'reebok101-101'),
 (3, 6, 'vans00100-101', 'vans00100-102'),
 (3, 7, 'vans00100-101', 'vans00100-103'),
@@ -636,15 +630,15 @@ INSERT INTO `goods_variations` (`Base_id`, `Variation_id`, `Base_Article`, `Vari
 
 CREATE TABLE `news` (
   `id` int UNSIGNED NOT NULL,
-  `Text` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `Image` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL
+  `text` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `image` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Дамп данных таблицы `news`
 --
 
-INSERT INTO `news` (`id`, `Text`, `Image`) VALUES
+INSERT INTO `news` (`id`, `text`, `image`) VALUES
 (4, 'Новая модель Reebok - Zig Kinetica! Zig Kinetica – модель с беговой историей, ставшая иконой уличного стиля. Сегодня технологии Reebok на страже повседневного комфорта. Дополнительные свойства: Зигзагообразный ТПУ каркас ZIG ENERGY SHELL обеспечивающий стабилизацию, направляя и возвращая кинетическую энергию. Комбинация пеноматериалов FLOATRIDE ENERGY и FLOATRIDE FUEL в промежуточной подошве обеспечивает легкую и отзывчивую амортизацию, а также гасит ударные нагрузки. Дышащий комбинированный верх выполнен с использованием двухслойной сетки и обеспечивает превосходную циркуляцию воздуха. Инновационные резиновые полоски ZIG ENERGY BANDS на подметке сжимаются и разжимаются, усиливая возврат энергии с каждым шагом.', 'img/info1.jpg'),
 (5, 'Кроссовки PUMA RS-Z LTH Trainers. Футуристический внешний вид модели PUMA RS-Z LTH Trainers сочетается с продуманными технологическим наполнением. Верх изготовлен из кожи и отвечает за внешний вид и долговечность пары. Подошва с технологией Running System — мягкий вспененный материал IMEVA и формованная стелька снижают ударные нагрузки и обеспечивают ощущение легкости даже на длинных дистанциях. Знаменитые полосы PUMA Formstrip выделяются по структуре, дополняя многослойную конструкцию верха.', 'png/info3.png'),
 (6, 'Зарегистрируйтесь на нашем сайте и получите бонус в виде промокода на первый заказ.', 'png/info2.png'),
@@ -658,22 +652,14 @@ INSERT INTO `news` (`id`, `Text`, `Image`) VALUES
 
 CREATE TABLE `orders` (
   `id` int UNSIGNED NOT NULL,
-  `Number` char(13) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `Status` enum('0','1','2','3') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '0',
-  `User_id` int UNSIGNED NOT NULL,
-  `Date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `Change_date` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  `Delivery_date` timestamp NOT NULL,
-  `Comment` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci
+  `number` char(13) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `status` enum('0','1','2','3') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '0',
+  `user_id` int UNSIGNED NOT NULL,
+  `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `change_date` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `delivery_date` timestamp NOT NULL,
+  `comment` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Дамп данных таблицы `orders`
---
-
-INSERT INTO `orders` (`id`, `Number`, `Status`, `User_id`, `Date`, `Change_date`, `Delivery_date`, `Comment`) VALUES
-(1, 'A10000-A00001', '0', 5, '2023-11-29 18:05:16', '2023-11-29 18:05:16', '2023-11-29 19:40:19', NULL),
-(2, 'A10001-A00002', '0', 5, '2023-11-29 18:06:16', '2023-11-29 18:06:16', '2023-11-29 19:40:19', NULL);
 
 -- --------------------------------------------------------
 
@@ -682,19 +668,10 @@ INSERT INTO `orders` (`id`, `Number`, `Status`, `User_id`, `Date`, `Change_date`
 --
 
 CREATE TABLE `orders_goods` (
-  `Order_id` int UNSIGNED NOT NULL,
-  `Goods_id` int UNSIGNED NOT NULL,
-  `Size` varchar(4) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL
+  `order_id` int UNSIGNED NOT NULL,
+  `goods_id` int UNSIGNED NOT NULL,
+  `size` varchar(4) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Дамп данных таблицы `orders_goods`
---
-
-INSERT INTO `orders_goods` (`Order_id`, `Goods_id`, `Size`) VALUES
-(1, 1, '42'),
-(2, 1, '43,5'),
-(2, 2, '43');
 
 -- --------------------------------------------------------
 
@@ -704,26 +681,21 @@ INSERT INTO `orders_goods` (`Order_id`, `Goods_id`, `Size`) VALUES
 
 CREATE TABLE `users` (
   `id` int UNSIGNED NOT NULL,
-  `FirstName` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `SecondName` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `Age` int UNSIGNED NOT NULL,
-  `Gender` enum('male','female') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `Email` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `Phone` char(18) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `Password` varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL
+  `first_name` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `second_name` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `age` int UNSIGNED NOT NULL,
+  `gender` enum('male','female') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `email` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `phone` char(11) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `password` varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Дамп данных таблицы `users`
 --
 
-INSERT INTO `users` (`id`, `FirstName`, `SecondName`, `Age`, `Gender`, `Email`, `Phone`, `Password`) VALUES
-(5, 'Дмитрий', 'Заболотнов', 19, 'male', 'dima.zabolotnov.02@mail.ru', '+7 (918) 219-55-84', '$2y$10$j3VsuFxHcIeTuCy/9yPfS.2BVzi/4AXy1KB4/nr14q/JUt6NlWiti'),
-(11, 'Дмитрий', 'Заболотнов', 12, 'male', 'dima.za2232@mail.ru', '+7 (918) 294-25-22', '$2y$10$t56uGoskE/jLBmrpzMlm3.ZkZ1yukDyHwk8Rar3YaTT7jrMx6GmS2'),
-(12, 'Дмитрий', 'Заболотнов', 43, 'male', 'dima.za423@mail.ru', '+7 (918) 111-11-12', '$2y$10$TwK3UYpWGj2UvUwjS0OMMuWchiJIFh.AOH.Zxr52S9deifhtbTj16'),
-(13, 'Дмитрий', 'Заболотнов', 43, 'male', 'dima.za425@mail.ru', '+7 (918) 222-22-22', '$2y$10$4xPK6YnY.oRFQZU6Kbe/6.ljQXGH17unMsp1vjACibDCwhRsoTQwK'),
-(14, 'Дмитрий', 'Коваленко', 22, 'female', 'danvbcsf@mail.ru', '+7 (124) 151-51-54', '$2y$10$czay3zomMM5UuR2aNjcQye2Uol3ai3IzPv6k4bMxbazPIbm5b9jtm'),
-(15, 'Дмитрий', 'Коваленко', 22, 'male', 'dima.za2512@mail.ru', '+7 (151) 515-15-11', '$2y$10$zx/B7DdeJlYiRLl4JNRUNuNggsYtInO0y91qSnt3d3Jky6QGjrlw6');
+INSERT INTO `users` (`id`, `first_name`, `second_name`, `age`, `gender`, `email`, `phone`, `password`) VALUES
+(16, 'Андрей', 'Антонов', 99, 'male', 'test3@mail.ru', '79999999999', '$2y$10$ujNQL.RwX7SuByY/fBE09OPQ7Q1ZCA2H86XP.euU9kr13KbU/AS3q');
 
 --
 -- Индексы сохранённых таблиц
@@ -739,16 +711,16 @@ ALTER TABLE `categories`
 -- Индексы таблицы `favorites`
 --
 ALTER TABLE `favorites`
-  ADD PRIMARY KEY (`User_id`,`Goods_id`),
-  ADD KEY `FavGoodsCall` (`Goods_id`);
+  ADD PRIMARY KEY (`user_id`,`product_id`) USING BTREE,
+  ADD KEY `FavGoodsCall` (`product_id`);
 
 --
 -- Индексы таблицы `feedbacks`
 --
 ALTER TABLE `feedbacks`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `User_id` (`User_id`,`Goods_id`),
-  ADD KEY `FitToGoodsCall` (`Goods_id`);
+  ADD UNIQUE KEY `User_id` (`user_id`,`goods_id`),
+  ADD KEY `FitToGoodsCall` (`goods_id`);
 
 --
 -- Индексы таблицы `filters`
@@ -775,56 +747,56 @@ ALTER TABLE `filters_values`
 -- Индексы таблицы `goods`
 --
 ALTER TABLE `goods`
-  ADD PRIMARY KEY (`id`,`Article`),
-  ADD UNIQUE KEY `Article` (`Article`),
-  ADD KEY `Title` (`Title`),
-  ADD KEY `CategoryCall` (`Category_id`);
+  ADD PRIMARY KEY (`id`,`article`),
+  ADD UNIQUE KEY `Article` (`article`),
+  ADD KEY `Title` (`title`),
+  ADD KEY `CategoryCall` (`category_id`);
 
 --
 -- Индексы таблицы `goods_related`
 --
 ALTER TABLE `goods_related`
-  ADD PRIMARY KEY (`Goods_id`,`Related_id`,`Goods_Article`,`Related_Article`),
-  ADD KEY `Goods_id` (`Goods_id`,`Goods_Article`),
-  ADD KEY `Related_id` (`Related_id`,`Related_Article`);
+  ADD PRIMARY KEY (`goods_id`,`related_id`,`goods_article`,`related_article`),
+  ADD KEY `Goods_id` (`goods_id`,`goods_article`),
+  ADD KEY `Related_id` (`related_id`,`related_article`);
 
 --
 -- Индексы таблицы `goods_variations`
 --
 ALTER TABLE `goods_variations`
-  ADD PRIMARY KEY (`Base_id`,`Variation_id`,`Base_Article`,`Variation_Article`),
-  ADD KEY `Base_id` (`Base_id`,`Base_Article`),
-  ADD KEY `Variation_id` (`Variation_id`,`Variation_Article`);
+  ADD PRIMARY KEY (`base_id`,`variation_id`,`base_article`,`variation_article`),
+  ADD KEY `Base_id` (`base_id`,`base_article`),
+  ADD KEY `Variation_id` (`variation_id`,`variation_article`);
 
 --
 -- Индексы таблицы `news`
 --
 ALTER TABLE `news`
   ADD PRIMARY KEY (`id`);
-ALTER TABLE `news` ADD FULLTEXT KEY `Text` (`Text`);
+ALTER TABLE `news` ADD FULLTEXT KEY `Text` (`text`);
 
 --
 -- Индексы таблицы `orders`
 --
 ALTER TABLE `orders`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `Number` (`Number`),
-  ADD KEY `User_id` (`User_id`);
+  ADD UNIQUE KEY `Number` (`number`),
+  ADD KEY `User_id` (`user_id`);
 
 --
 -- Индексы таблицы `orders_goods`
 --
 ALTER TABLE `orders_goods`
-  ADD PRIMARY KEY (`Goods_id`,`Order_id`),
-  ADD KEY `OrderGToOrders` (`Order_id`);
+  ADD PRIMARY KEY (`goods_id`,`order_id`),
+  ADD KEY `OrderGToOrders` (`order_id`);
 
 --
 -- Индексы таблицы `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `Email` (`Email`),
-  ADD UNIQUE KEY `Phone` (`Phone`);
+  ADD UNIQUE KEY `Email` (`email`),
+  ADD UNIQUE KEY `Phone` (`phone`);
 
 --
 -- AUTO_INCREMENT для сохранённых таблиц
@@ -876,7 +848,7 @@ ALTER TABLE `orders`
 -- AUTO_INCREMENT для таблицы `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- Ограничения внешнего ключа сохраненных таблиц
@@ -886,15 +858,15 @@ ALTER TABLE `users`
 -- Ограничения внешнего ключа таблицы `favorites`
 --
 ALTER TABLE `favorites`
-  ADD CONSTRAINT `FavGoodsCall` FOREIGN KEY (`Goods_id`) REFERENCES `goods` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT,
-  ADD CONSTRAINT `FavUserCall` FOREIGN KEY (`User_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT;
+  ADD CONSTRAINT `FavGoodsCall` FOREIGN KEY (`product_id`) REFERENCES `goods` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT,
+  ADD CONSTRAINT `FavUserCall` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT;
 
 --
 -- Ограничения внешнего ключа таблицы `feedbacks`
 --
 ALTER TABLE `feedbacks`
-  ADD CONSTRAINT `FitToGoodsCall` FOREIGN KEY (`Goods_id`) REFERENCES `goods` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT,
-  ADD CONSTRAINT `FitToUserCall` FOREIGN KEY (`User_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT;
+  ADD CONSTRAINT `FitToGoodsCall` FOREIGN KEY (`goods_id`) REFERENCES `goods` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT,
+  ADD CONSTRAINT `FitToUserCall` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT;
 
 --
 -- Ограничения внешнего ключа таблицы `filters_goods`
@@ -913,34 +885,34 @@ ALTER TABLE `filters_values`
 -- Ограничения внешнего ключа таблицы `goods`
 --
 ALTER TABLE `goods`
-  ADD CONSTRAINT `CategoryCall` FOREIGN KEY (`Category_id`) REFERENCES `categories` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT;
+  ADD CONSTRAINT `CategoryCall` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT;
 
 --
 -- Ограничения внешнего ключа таблицы `goods_related`
 --
 ALTER TABLE `goods_related`
-  ADD CONSTRAINT `goods_related_ibfk_1` FOREIGN KEY (`Goods_id`,`Goods_Article`) REFERENCES `goods` (`id`, `Article`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `goods_related_ibfk_2` FOREIGN KEY (`Related_id`,`Related_Article`) REFERENCES `goods` (`id`, `Article`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `goods_related_ibfk_1` FOREIGN KEY (`goods_id`,`goods_article`) REFERENCES `goods` (`id`, `article`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `goods_related_ibfk_2` FOREIGN KEY (`related_id`,`related_article`) REFERENCES `goods` (`id`, `article`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Ограничения внешнего ключа таблицы `goods_variations`
 --
 ALTER TABLE `goods_variations`
-  ADD CONSTRAINT `goods_variations_ibfk_1` FOREIGN KEY (`Base_id`,`Base_Article`) REFERENCES `goods` (`id`, `Article`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `goods_variations_ibfk_2` FOREIGN KEY (`Variation_id`,`Variation_Article`) REFERENCES `goods` (`id`, `Article`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `goods_variations_ibfk_1` FOREIGN KEY (`base_id`,`base_article`) REFERENCES `goods` (`id`, `article`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `goods_variations_ibfk_2` FOREIGN KEY (`variation_id`,`variation_article`) REFERENCES `goods` (`id`, `article`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Ограничения внешнего ключа таблицы `orders`
 --
 ALTER TABLE `orders`
-  ADD CONSTRAINT `OrderToUser` FOREIGN KEY (`User_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT;
+  ADD CONSTRAINT `OrderToUser` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT;
 
 --
 -- Ограничения внешнего ключа таблицы `orders_goods`
 --
 ALTER TABLE `orders_goods`
-  ADD CONSTRAINT `OrderGToGoods` FOREIGN KEY (`Goods_id`) REFERENCES `goods` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT,
-  ADD CONSTRAINT `OrderGToOrders` FOREIGN KEY (`Order_id`) REFERENCES `orders` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT;
+  ADD CONSTRAINT `OrderGToGoods` FOREIGN KEY (`goods_id`) REFERENCES `goods` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT,
+  ADD CONSTRAINT `OrderGToOrders` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

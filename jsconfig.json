@@ -1,11 +1,14 @@
 {
   "compilerOptions": {
+    "baseUrl": ".",
     "paths": {
       "@/*": ["./*"],
-      "@/comps": ["./app/components"],
-      "@/base": ["./app/components/base"],
-      "@/redux": ["./lib/redux"],
-      "@/basecomp":["./lib/basecomponents"]
-    }
+      "@/comps/*": ["./app/_components/*"],
+      "@/base/*": ["./app/_components/base/*"],
+      "@/lib/*": ["./app/_lib/*"],
+      "@/redux/*": ["./app/_lib/redux/*"],
+      "@/baseComps/*":["./app/_lib/baseComponents/*"]
+    },
+    "jsx": "react"
   }
 }

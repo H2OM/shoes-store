@@ -1,10 +1,11 @@
-// @import "common/Fonts";
-@import "common/Vars";
-@import "common/Error";
-@import "common/Elements";
-@import "common/Slider";
+//@use "common/Fonts";
+@use "common/Vars";
+@use "common/Error";
+@use "common/Elements";
+@use "common/Slider";
+@use "common/Form";
 
-// @import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,200;0,300;0,400;0,500;0,600;1,500&display=swap');
+//@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,200;0,300;0,400;0,500;0,600;1,500&display=swap');
 * {
     // font-family: 'Raleway', sans-serif;
     font-weight: 300;
@@ -25,7 +26,7 @@ body {
     }
     
     &::-webkit-scrollbar-thumb {
-        background-color: $dark-purple;
+        background-color: Vars.$dark-purple;
     }
 }
 .section {
@@ -37,6 +38,42 @@ body {
     max-width: 1200px;
     margin: 0 auto;
     padding:0px 10px;
+}
+
+*:disabled,
+._disabled {
+  opacity: .7;
+}
+
+._w-100 {
+    width: 100%;
+    min-width: unset;
+}
+
+
+label {
+    &:has(input[type='checkbox']),
+    &:has(input[type='radio']) {
+        cursor: pointer;
+    }
+}
+
+input {
+    font-family: inherit;
+    font-weight: 400;
+    &[type='checkbox'], &[type='radio'] {
+        cursor: pointer;
+        accent-color: Vars.$dark-purple;
+    }
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+    &:focus {
+        outline: none;
+        border-bottom: 1px solid #afafaf;
+    }
 }
 
 .spinnerWrap {
@@ -57,12 +94,12 @@ body {
         margin: -1px;
         border-radius: 100%;
         background-color: unset;
-        border-left: 20px solid $dark-purple;
+        border-left: 20px solid Vars.$dark-purple;
         border-bottom: 20px solid #ffffff;
-        border-right: 20px solid $dark-purple;
+        border-right: 20px solid Vars.$dark-purple;
         border-top: 20px solid #ffffff;
         animation: spinnerRoll .6s linear infinite;
-        outline: 2px solid $dark-purple;
+        outline: 2px solid Vars.$dark-purple;
         outline-offset: -15px;
     }
 }

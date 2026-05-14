@@ -1,7 +1,9 @@
-.btn  {
+@use "Vars";
+
+.btn {
     color: white;
     font-size: 16px;
-    background-color: $dark-purple;
+    background-color: Vars.$dark-purple;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -13,19 +15,36 @@
     cursor: pointer;
     text-decoration: none;
     transition: 0.2s all;
+    font-family: raleway, raleway Fallback, serif;
     &:hover {
-        background-color: rgba(151,28,195,.7);
-        color: white;
+        opacity: .7;
     }
-    &:active {
-        background-color: $dark-purple;
+    &:not(._white):active {
+        background-color: Vars.$dark-purple;
+        color: white;
+        svg {
+            fill: white;
+        }
         transition: 0s all;
     }
-    &_small {
+    &._outline {
+        background-color: transparent;
+        border: 1px solid Vars.$dark-purple;
+        color: Vars.$dark-purple;
+    }
+    &._small {
         border-radius: 3px;
         font-size: 14px;
         font-weight: 400;
         height: 30px;
+    }
+    &._gray {
+        color: #000;
+        background-color: unset;
+        &:hover {
+            opacity: 1;
+            background: Vars.$light-gray;
+        }
     }
     &_big {
         width: 50%;
@@ -37,23 +56,14 @@
         width: auto;
         margin-right: 5px;
         margin-bottom: 3px;
-        path {
-            fill: white;
-        }
-        &_white {
-            filter: invert(1);
-            // .color {
-            //     fill: white;
-            // }
-        }
-
     }
+    &:disabled,
     &_disabled {
         &:hover {
-            background-color: $dark-purple;
+            background-color: Vars.$dark-purple;
         }
         &:active {
-            background-color: $dark-purple;
+            background-color: Vars.$dark-purple;
             transition: 0s all;
         }
     }
@@ -73,13 +83,13 @@
     &__count {
         text-indent: 10px;
         font-weight: 300;
-        color: $light-black;
+        color: Vars.$light-black;
         font-size: 24px;
     }
     &__type {
         font-size: 14px;
         font-weight: 400;
-        color: $light-black;
+        color: Vars.$light-black;
     }
     &_lite {
         font-size: 18px;
@@ -106,22 +116,21 @@
     &__btns {
         font-size: 16px;
         font-weight: 400;
-        background-color: unset;
         border: none;
         display: flex;
         justify-content: center;
         align-items:center;
-        background-color: $dark-purple;
+        background-color: Vars.$dark-purple;
         height: 32px;
         width: 32px;
         border-radius: 5px;
         transition: 0.2s all;
         cursor: pointer;
         &:hover {
-            box-shadow: -4px 4px 0px 0px $suberblack-purple;
+            box-shadow: -4px 4px 0px 0px Vars.$suberblack-purple;
         }
         &:active {
-            box-shadow: 0px 0px 0px 0px $dark-purple;
+            box-shadow: 0px 0px 0px 0px Vars.$dark-purple;
         }
         &::before {
             content: "";
@@ -139,10 +148,10 @@
             margin-left: 5px;
             transform: rotate(180deg);
             &:hover {
-                box-shadow: -4px -4px 0px 0px $suberblack-purple;
+                box-shadow: -4px -4px 0px 0px Vars.$suberblack-purple;
             }
             &:active {
-                box-shadow: 0px 0px 0px 0px $dark-purple;
+                box-shadow: 0px 0px 0px 0px Vars.$dark-purple;
             }
         }
     }
@@ -162,7 +171,7 @@
             border-radius: 5px;
             cursor: pointer;
             &_active {
-                background-color: $light-purple;
+                background-color: Vars.$light-purple;
             }
         }
         &__dot {
