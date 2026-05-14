@@ -5,5 +5,5 @@
         '^api/basket/([a-z0-9-_]+)$'=>'Basket',
         '^api/catalog/([a-z0-9-_]+)$'=>'Catalog',
         '^api/callback/([a-z0-9-_]+)$'=>'Callback',
-        '^api/media/([a-z0-9-_]+)$'=>'Media',
+        '^api/main/([a-z0-9-_]+)$'=>'Media',
     ];

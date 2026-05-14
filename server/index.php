@@ -1,24 +1,14 @@
 <?php
-    use app\Router;
-    use app\Db;
 
-    require_once "./settings/config.php";
-    require_once LIB . "functions.php";
+use app\core\Container;
+use app\core\Router;
+use app\core\App;
 
-    $Routing = new Router();
+require_once "./settings/config.php";
 
-    session_start();
+session_start();
 
-    Db::instance();
+App::init(new Container());
+App::container()->setVariable('db_config', require CONF . 'config_db.php');
 
-    if($Routing->determineRoute()) {
-
-        $Routing->tempClass->run($Routing->query);
-
-    } else {
-
-        header("HTTP/1.0 400 Bad request");
-        
-        die;
-    }
-  
+Router::dispatchInit();
