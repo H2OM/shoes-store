@@ -1,0 +1,15 @@
+.form {
+    &__field-status {
+        &._correct {
+            &:before {
+
+            }
+        }
+
+        &._incorrect {
+            &:before {
+
+            }
+        }
+    }
+}

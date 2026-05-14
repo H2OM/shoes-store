@@ -1,0 +1,14 @@
+.miniSlider {
+    margin-top: 45px;
+    overflow: hidden;
+    padding-right: 10px;
+    &__content {
+        margin: 0 -15px;
+        margin-top: 20px;
+        padding-bottom: 26px;
+        display: grid;
+        grid-template-columns: repeat(4, 25%);
+        grid-auto-flow: column;
+        transition: 0.2s all;
+    }
+}

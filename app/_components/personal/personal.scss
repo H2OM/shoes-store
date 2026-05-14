@@ -1,0 +1,309 @@
+@use "../../scss/common/Vars" as *;
+
+.Personal {
+    padding-top: 45px;
+    padding-bottom: 60px;
+
+    &__split {
+        margin-top: 25px;
+        display: flex;
+
+        &__side {
+            width: 25%;
+            min-width: 210px;
+            height: 256px;
+            background-color: white;
+            box-shadow: 0 0 10px 0 rgba(0,0,0,.1);
+            padding: 10px 10px 15px;
+            border-radius: 8px;
+            &__btn {
+                font-size: 16px;
+                width: 100%;
+                position: relative;
+                justify-content: flex-start;
+                background-color: unset;
+                margin-bottom: 10px;
+                color: black;
+                height: 35px;
+                transition: 0.1s all;
+                font-weight: 400;
+                &::before {
+                    content: "";
+                    display: block;
+                    position: absolute;
+                    top: 50%;
+                    background-image: url('../../../public/svg/arrow-corner.svg');
+                    background-size: contain;
+                    background-repeat: no-repeat;
+                    width: 11px;
+                    height: 11px;
+                    right: 6px;
+                    transform: translateY(-50%);
+                }
+                &._active {
+                    color: white;
+                    background-color: $dark-purple;
+                    &:hover {
+                        background-color: $dark-purple;
+                    }
+                    &:active {
+                        background-color: $dark-purple;
+                    }
+                    &::before {
+                        display: none !important;
+                    }
+                    &._gray {
+                        background-color: $light-gray;
+                        color: black;
+                        svg {
+                            fill: black;
+                        }
+                    }
+                    .btn__svg {
+                        fill: white;
+                    }
+                }
+                &._exit {
+                    margin-bottom: 0;
+                    position: relative;
+                    z-index: 6;
+                    &::before {
+                        display: none !important;
+                    }
+                    &:active {
+                        background-color: unset;
+                        color: black;
+                        svg {
+                            fill: black;
+                        }
+                    }
+                }
+                .btn__svg {
+                    fill: black;
+                }
+            }
+            &__block {
+                position: relative;
+                &__modal {
+                    margin: 0 auto;
+                    position: relative;
+                    z-index: 5;
+                    background-color: white;
+                    width: 95%;
+                    overflow: hidden;
+                    border-radius: 0 0 5px 5px;
+                    padding: 0 6px;
+                    height: 0;
+                    box-shadow: 0 0 10px 0 rgba(0,0,0,.20);
+                    transition: .1s height linear, .1s padding linear;
+                    &._active {
+                        height: 60px;
+                        padding: 6px;
+                    }
+                    &__title {
+                        font-size: 14px;
+                        font-weight: 400;
+                        text-align: center;
+                    }
+                    &__wrap {
+                        display: flex;
+                        justify-content: space-between;
+                        margin-top: 8px;
+                        gap: 5px;
+                        .btn {
+                            width: 100%;
+                            min-width: unset;
+                            height: auto;
+                            padding: 4px 0;
+                            border-radius: 3px;
+                            font-size: 14px;
+                            font-weight: 400;
+                        }
+                    }
+                }
+            }
+        }
+        &__content {
+            width: 75%;
+            margin-left: 20px;
+            position: relative;
+            &__split {
+                display: flex;
+                margin-top: 25px;
+                gap: 60px;
+                &:has(.cart-wrap) {
+                    gap: 0;
+                    flex-wrap: wrap;
+                    .cart-wrap {
+                        width: calc(100% / 3);
+                    }
+                }
+                &__block {
+                    width: 50%;
+                    &__title {
+                        color: $light-black;
+                        font-size: 20px;
+                        font-weight: 300;
+                        text-align: center;
+                        margin-bottom: 20px;
+                        
+                    }
+                    &__field {
+                        display: flex;
+                        justify-content: space-between;
+                        font-weight: 400;
+                        font-size: 16px;
+                        margin-bottom: 25px;
+                        padding-bottom: 3px;
+                        border-bottom: 1px solid #d3d3d3;
+                        [data-info] {
+                            font-weight: 400;
+                        }
+                    }
+                    &__label {
+                        display: grid;
+                        grid-template-columns: auto 1fr;
+                        justify-content: space-between;
+                        margin-bottom: 25px;
+                        font-weight: 400;
+                        font-size: 16px;
+                        &._switch {
+                            grid-template-columns: 1fr auto auto;
+                            border-bottom: 1px solid #d3d3d3;
+                            padding-bottom: 3px;
+                        }
+                        &__switch {
+                            color: #000;
+                            font-weight: 400;
+                            font-size: 16px;
+                            &:first-child {
+                                margin-right: 30px;
+                            }
+                            &__radio {
+
+                            }
+                        }
+                        &__input {
+                            margin-left: 15px;
+                            padding-bottom: 3px;
+                            background-color: unset;
+                            outline: unset;
+                            border: unset;
+                            font-size: 16px;
+                            color: rgb(0, 0, 0);
+                            font-weight: 400;
+                            text-align: end;
+                            border-bottom: 1px solid #d3d3d3;
+                            &::placeholder {
+                                font-size: 16px;
+                                color: rgb(0, 0, 0);
+                                font-style: italic;
+                            }
+                            &:focus {
+                                border-bottom: 1px solid black;
+                                outline: unset;
+                            }
+                        }
+                    }
+                }
+            }
+            .personal-btn {
+                margin: 30px auto 0;
+                min-width: 190px;
+                width: 40%;
+            }
+            &__block {
+                margin-top: 25px;
+                margin-bottom: 30px;
+                &__order {
+                    box-shadow: 2px 2px 6px 0px rgba(#000000, .25);
+                    border-radius: 10px;
+                    &__bar {
+                        display: flex;
+                        justify-content: space-between;
+                        background-color: rgba($dark-purple, .08);
+                        border-radius: 10px 10px 0 0;
+                        height: 42px;
+                        align-items: center;
+                        padding: 0 15px;
+                        &__title {
+                            font-size: 18px;
+                            font-weight: 400;
+                        }
+                        &._bottom {
+                            border-radius: 0 0 10px 10px;
+                        }
+                    }
+                    &__content {
+                        &__cart {
+                            display: flex;
+                            justify-content: space-between;
+                            background-color: unset;
+                            padding: 15px;
+                            border-bottom: 1px solid $gray;
+                            &__desc {
+                                &__price {
+                                    font-size: 18px;
+                                    font-weight: 600;
+                                    &._new {
+                                        color: $dark-purple;
+                                    }
+                                    &._old {
+                                        padding-left: 5px;
+                                        font-size: 16px;
+                                        font-weight: 500;
+                                        color: #000;
+                                        text-decoration: line-through;
+                                        font-style: italic;
+                                    }
+                                }
+                                &__title {
+                                    margin: 10px 0px;
+                                    font-weight: 400;
+                                    font-size: 16px;
+                                }
+                                &__subtitle {
+                                    font-size: 15px;
+                                    margin: 10px 0px;
+                                    color: $light-black;
+                                }
+                                &__link  {
+                                    color: black;
+                                    text-decoration: none;
+                                    cursor: pointer;
+                                }
+                            }
+                               
+                            &__image {
+                                height: 140px;
+                                width: 140px;
+                                object-fit: cover;
+                                border-radius: 10px;
+                            }
+                            &:last-child {
+                                border: unset;
+                            }
+                        }
+                    }
+                }
+            }
+            .filters {
+                grid-template-columns: repeat(5, 1fr);
+            }
+            &__grid {
+                display: flex;
+                margin-right: -15px;
+                margin-top: 5px;
+                margin-bottom: 80px;
+                flex-wrap: wrap;
+                .cart-wrap {
+                    width: 33%;
+                    .cart-wrap-btn {
+                        margin-top: 10px;
+                    }
+                }
+            }
+            
+        }
+    }
+}
